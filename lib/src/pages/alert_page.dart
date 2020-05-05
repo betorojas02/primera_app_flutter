@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+
+class AlertPage extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Alert Page'),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: RaisedButton(
+          child: Text('Mostrar alerta'),
+          color: Colors.blue,
+          textColor: Colors.white,
+          shape: StadiumBorder(),
+          onPressed: () => _mostrarAlert(context),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon( Icons.add_location),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+
+
+  void _mostrarAlert(context){
+    showDialog<void>(
+      
+      context: context,
+      barrierDismissible: true ,
+      // false = user must tap button, true = tap outside dialog
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0)
+          ),
+          title: Text('title'),
+          content: Text('dialogBody'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('buttonText'),
+              onPressed: () {
+                Navigator.of(dialogContext).pop(); // Dismiss alert dialog
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
